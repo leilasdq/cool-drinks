@@ -1,5 +1,6 @@
 package com.example.cooldrinks.di
 
+import com.example.cooldrinks.remote.DrinksService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "www.thecocktaildb.com/api/json/v1/1"
+    private const val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
 
     @Provides
     @Singleton
@@ -29,10 +30,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient) =
+    fun provideRetrofit(client: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    @Provides
+    @Singleton
+    fun provideDrinksRemoteService(retrofit: Retrofit): DrinksService = retrofit.create(DrinksService::class.java)
 }
