@@ -1,17 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CoolDrinks" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.CoolDrinks" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/primary_brand_color</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/secondary_brand_color</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="backgroundColor">@color/background_color</item>
+        <item name="android:windowBackground">@color/background_color</item>
+        <item name="widget.text.primary">@style/MyPrimaryTextStyle</item>
+        <item name="widget.text.secondary">@style/MySecondaryTextStyle</item>
+        <item name="appBarLayoutStyle">@style/MyAppbarStyle</item>
+        <item name="toolbarStyle">@style/MyToolbarStyle</item>
     </style>
 
     <style name="Theme.CoolDrinks.NoActionBar">
@@ -22,4 +27,37 @@
     <style name="Theme.CoolDrinks.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CoolDrinks.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyAppbarStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:background">@color/background_color</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:elevation">@dimen/dimen_toolbar_elevation</item>
+    </style>
+
+    <style name="MyToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextAppearance">@style/ToolbarTitle</item>
+        <item name="background">@color/background_color</item>
+        <item name="titleTextColor">@color/color_primary_text</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/color_primary_text</item>
+    </style>
+
+    <style name="MyPrimaryTextStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/color_primary_text</item>
+        <item name="android:textSize">@dimen/dimen_text_primary</item>
+    </style>
+
+    <style name="MyBoldPrimaryTextStyle" parent="MyPrimaryTextStyle">
+        <item name="android:textColor">@color/color_primary_text</item>
+        <item name="android:textSize">@dimen/dimen_text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MySecondaryTextStyle" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/color_secondary_text</item>
+        <item name="android:textSize">@dimen/dimen_text_secondary</item>
+    </style>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="widget.text.primary" format="reference"/>
+    <attr name="widget.text.secondary" format="reference"/>
+    <attr name="widget.cardView" format="reference"/>
+</resources>
