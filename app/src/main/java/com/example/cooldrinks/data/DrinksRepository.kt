@@ -9,20 +9,19 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 interface DrinksRepository {
-    fun getNonAlcoholicDrinks(coroutineContext: CoroutineContext): Flow<Resource<List<Drink>>>
+    fun getNonAlcoholicDrinks(): Flow<Resource<List<Drink>>>
 }
 
 class DefaultDrinksRepository @Inject constructor(
     private val drinksService: DrinksService
 ): DrinksRepository {
 
-    override fun getNonAlcoholicDrinks(coroutineContext: CoroutineContext): Flow<Resource<List<Drink>>> =
+    override fun getNonAlcoholicDrinks(): Flow<Resource<List<Drink>>> =
         networkResult(
             { drinksService.getNonAlcoholicDrinks() },
             { data ->
                 data.list.map { it.toDomain() }
-            },
-            coroutineContext
+            }
         )
 
 }

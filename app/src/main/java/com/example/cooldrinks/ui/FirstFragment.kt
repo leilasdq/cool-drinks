@@ -49,7 +49,7 @@ class FirstFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenCreated {
-            repo.getNonAlcoholicDrinks(this.coroutineContext).collect{ resource ->
+            repo.getNonAlcoholicDrinks().collect{ resource ->
                 when(resource) {
                     is Resource.Success -> {
                         Log.d("testtt", "onViewCreated: success ${resource.data}")

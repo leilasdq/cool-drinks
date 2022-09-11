@@ -10,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
 fun <TRemote: Any, TResult: Any> networkResult(
     networkCall: suspend () -> TRemote,
     mapRemoteToResult: (data: TRemote) -> TResult,
-    coroutineContext: CoroutineContext
+    coroutineContext: CoroutineContext = Dispatchers.IO
 ): Flow<Resource<TResult>> = flow<Resource<TResult>> {
     val remoteData = coroutineContext.run {
         networkCall.invoke()
