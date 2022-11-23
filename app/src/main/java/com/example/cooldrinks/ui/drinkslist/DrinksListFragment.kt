@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cooldrinks.R
@@ -28,14 +31,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DrinksListFragment : Fragment() {
 
-    @Inject
-    lateinit var repo: DrinksRepository
-
-    private var _binding: FragmentDrinksListBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val viewModel by viewModels<DrinksListViewModel>()
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
@@ -45,46 +41,14 @@ class DrinksListFragment : Fragment() {
     ): View? {
          return ComposeView(requireContext()).apply {
              setContent {
+                 val drinksList by viewModel.drinks.observeAsState()
                  Scaffold() {
                      Column {
-                         val fakeList = mutableListOf<Drink>()
-                         for (i in 0 .. 5) {
-                             fakeList.add(Drink("name $i", "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg", "$i"))
-                         }
-                         DrinksList(fakeList)
+                         DrinksList(drinksList ?: emptyList())
                      }
                  }
              }
          }
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        /*binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }*/
-
-        lifecycleScope.launchWhenCreated {
-            repo.getNonAlcoholicDrinks().collect{ resource ->
-                when(resource) {
-                    is Resource.Success -> {
-                        Log.d("testtt", "onViewCreated: success ${resource.data}")
-                    }
-                    is Resource.Error -> {
-                        Log.d("testtt", "onViewCreated: error ${resource.error.message}")
-                    }
-                    is Resource.Loading -> {
-                        Log.d("testtt", "onViewCreated: loading")
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
