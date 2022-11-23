@@ -36,11 +36,6 @@ fun DrinkItem(drink: Drink) {
             .padding(dimensionResource(id = R.dimen.dimen_margin_small)),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        var timer = 0
-        LaunchedEffect(key1 = drink) {
-            timer = setTimeToMakeDrink()
-        }
-
         ImageCardBackground {
             Image(
                 painter = rememberGlidePainter(drink.imageUrl),
@@ -56,7 +51,7 @@ fun DrinkItem(drink: Drink) {
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.dimen_margin_small))
             )
-            Text(text = "Time to be ready: $timer")
+            Text(text = "Time to be ready: ${setTimeToMakeDrink()} minutes.")
         }
     }
 }
