@@ -60,4 +60,9 @@
         <item name="android:textColor">@color/color_secondary_text</item>
         <item name="android:textSize">@dimen/dimen_text_secondary</item>
     </style>
+
+    <style name="ImageViewCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:radius">@dimen/dimen_main_radius</item>
+        <item name="cardBackgroundColor">@color/secondary_brand_color</item>
+    </style>
 </resources>
