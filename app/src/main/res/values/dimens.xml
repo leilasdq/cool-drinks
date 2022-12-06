@@ -1,3 +1,25 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="dimen_text_primary">14sp</dimen>
+    <dimen name="error_text_size">@dimen/dimen_text_primary</dimen>
+    <dimen name="dimen_text_secondary">12sp</dimen>
+
+    <dimen name="dimen_main_elevation">5dp</dimen>
+    <dimen name="dimen_toolbar_elevation">0dp</dimen>
+    <dimen name="dimen_main_radius">5dp</dimen>
+
+    <dimen name="dimen_margin_tiny">4dp</dimen>
+    <dimen name="dimen_margin_small">8dp</dimen>
+    <dimen name="dimen_margin_normal">16dp</dimen>
+
+    <!-- text sizes-->
+    <dimen name="textSize_xxLarge">24sp</dimen>
+    <dimen name="textSize_xLarge">22sp</dimen>
+    <dimen name="textSize_large">20sp</dimen>
+    <dimen name="textSize_xMedium">18sp</dimen>
+    <dimen name="textSize_medium">16sp</dimen>
+    <dimen name="textSize_small">14sp</dimen>
+    <dimen name="textSize_xSmall">12sp</dimen>
+    <dimen name="textSize_xxSmall">10sp</dimen>
 </resources>
