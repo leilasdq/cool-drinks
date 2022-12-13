@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberImagePainter
 import kotlin.random.Random
 
 @Composable
@@ -38,7 +39,7 @@ fun DrinkItem(drink: Drink) {
     ) {
         ImageCardBackground {
             Image(
-                painter = rememberGlidePainter(drink.imageUrl),
+                painter = rememberImagePainter(data =(drink.imageUrl)),
                 contentDescription = null,
             )
         }
@@ -58,7 +59,7 @@ fun DrinkItem(drink: Drink) {
 
 fun setTimeToMakeDrink() = Random.nextInt(10, 30)
 
-@Composable @Preview
+@Composable @Preview(showSystemUi = true, showBackground = true)
 private fun Prev() {
     val fakeList = mutableListOf<Drink>()
     for (i in 0 .. 5) {
