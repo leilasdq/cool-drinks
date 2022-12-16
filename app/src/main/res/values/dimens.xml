@@ -8,10 +8,12 @@
     <dimen name="dimen_main_elevation">5dp</dimen>
     <dimen name="dimen_toolbar_elevation">0dp</dimen>
     <dimen name="dimen_main_radius">5dp</dimen>
+    <dimen name="dimen_large_radius">16dp</dimen>
 
     <dimen name="dimen_margin_tiny">4dp</dimen>
     <dimen name="dimen_margin_small">8dp</dimen>
     <dimen name="dimen_margin_normal">16dp</dimen>
+    <dimen name="dimen_margin_large">32dp</dimen>
 
     <!-- text sizes-->
     <dimen name="textSize_xxLarge">24sp</dimen>

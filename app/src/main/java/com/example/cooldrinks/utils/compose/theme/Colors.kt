@@ -22,3 +22,7 @@ val lightSurfaceColor = Color(0xFFafcf63)
 val darkSurfaceColor = Color(0xFF3e4e18)
 val lightOnSurfaceColor = Color(0xFF181717)
 val darkOnSurfaceColor = Color(0xFFDBD9D9)
+
+val iconColor = Color(0xFF7E7A7A)
+val starColor = Color(0xFFFFEB3B)
+val timerColor = Color(0xFFFF5722)

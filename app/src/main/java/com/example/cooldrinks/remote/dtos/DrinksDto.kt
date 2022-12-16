@@ -8,5 +8,7 @@ data class DrinksDto(
     @SerializedName("strDrinkThumb")
     val imageUrl: String,
     @SerializedName("idDrink")
-    val id: String
+    val id: String,
+    @SerializedName("strInstructions")
+    val instruction: String?
 )
