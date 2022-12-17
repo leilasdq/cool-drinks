@@ -9,6 +9,7 @@ import com.example.cooldrinks.model.Drink
 import com.example.cooldrinks.utils.compose.ImageCardBackground
 import com.google.accompanist.glide.rememberGlidePainter
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,21 +21,26 @@ import kotlin.random.Random
 
 @Composable
 fun DrinksList(
-    drinks: List<Drink>
+    drinks: List<Drink>,
+    onItemClicked: (Int) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(items = drinks) { item ->
-            DrinkItem(drink = item)
+            DrinkItem(drink = item, onItemClicked)
         }
     }
 }
 
 @Composable
-fun DrinkItem(drink: Drink) {
+fun DrinkItem(
+    drink: Drink,
+    onItemClicked: (Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.dimen_margin_small)),
+            .padding(dimensionResource(id = R.dimen.dimen_margin_small))
+            .clickable { onItemClicked.invoke(drink.id.toInt()) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         ImageCardBackground {
@@ -65,5 +71,5 @@ private fun Prev() {
     for (i in 0 .. 5) {
         fakeList.add(Drink("name $i", "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg", "$i", "hh"))
     }
-    DrinksList(fakeList)
+    DrinksList(fakeList) {}
 }

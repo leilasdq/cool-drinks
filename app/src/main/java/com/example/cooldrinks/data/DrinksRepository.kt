@@ -10,6 +10,7 @@ import kotlin.coroutines.CoroutineContext
 
 interface DrinksRepository {
     fun getNonAlcoholicDrinks(): Flow<Resource<List<Drink>>>
+    fun getDrinkDetail(id: Int): Flow<Resource<Drink>>
 }
 
 class DefaultDrinksRepository @Inject constructor(
@@ -21,6 +22,14 @@ class DefaultDrinksRepository @Inject constructor(
             { drinksService.getNonAlcoholicDrinks() },
             { data ->
                 data.list.map { it.toDomain() }
+            }
+        )
+
+    override fun getDrinkDetail(id: Int): Flow<Resource<Drink>> =
+        networkResult(
+            { drinksService.getDrinkDetail(id) },
+            { data ->
+                data.list[0].toDomain()
             }
         )
 

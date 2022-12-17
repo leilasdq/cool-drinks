@@ -2,6 +2,8 @@ package com.example.cooldrinks.di
 
 import com.example.cooldrinks.BuildConfig
 import com.example.cooldrinks.remote.DrinksService
+import com.example.cooldrinks.utils.BASE_URL
+import com.example.cooldrinks.utils.TimeOut
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +19,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-    private const val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
-    const val TimeOut = 50L
 
     @Provides
     @Singleton

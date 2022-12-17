@@ -3,26 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/navigation_drinks_list">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/navigation_drinks_list"
         android:name="com.example.cooldrinks.ui.drinkslist.DrinksListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="ListFragment"
         tools:layout="@layout/fragment_drinks_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_drinkList_to_detail"
+            app:destination="@id/navigation_drink_detail" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.cooldrinks.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:id="@+id/navigation_drink_detail"
+        android:name="com.example.cooldrinks.ui.drinkdetail.DrinkDetailFragment"
+        android:label="DetailFragment"
         tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="drinkId"
+            app:argType="integer" />
     </fragment>
 </navigation>
