@@ -116,6 +116,30 @@ fun DetailDrinkView(
                 }
             }
             Text(
+                text = "Ingredient list",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Center
+            )
+            item.ingredient?.let {
+                val bullet = "\u2022"
+                for (ingredientItem in it) {
+                    Column {
+                        Text(
+                            text = "$bullet $ingredientItem",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                }
+            }
+            Text(
                 text = "Instruction",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -155,6 +179,13 @@ fun DetailDrinkView(
 @Preview(showSystemUi = true, showBackground = true) @Composable
 private fun prev() {
     AppTheme {
-        DetailDrinkView(Drink("name", "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg", "1", "how to make it"))
+        DetailDrinkView(
+            Drink(
+                "name",
+                "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg",
+                "1",
+                "how to make it",
+                listOf("Orange juice", "Grapefruit juice", "Apple juice")
+            ))
     }
 }

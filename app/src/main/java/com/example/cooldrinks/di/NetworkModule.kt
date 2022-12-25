@@ -2,8 +2,12 @@ package com.example.cooldrinks.di
 
 import com.example.cooldrinks.BuildConfig
 import com.example.cooldrinks.remote.DrinksService
+import com.example.cooldrinks.remote.dtos.DrinkIngredientListDeserialize
+import com.example.cooldrinks.remote.dtos.DrinksDto
 import com.example.cooldrinks.utils.BASE_URL
 import com.example.cooldrinks.utils.TimeOut
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,11 +47,24 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient): Retrofit =
+    fun provideGson() = GsonBuilder()
+        .registerTypeAdapter(DrinksDto::class.java, DrinkIngredientListDeserialize)
+        .create()
+
+    @Singleton
+    @Provides
+    fun provideGsonConverter(gson: Gson) = GsonConverterFactory.create(gson)
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        client: OkHttpClient,
+        factory: GsonConverterFactory
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(factory)
             .build()
 
     @Provides

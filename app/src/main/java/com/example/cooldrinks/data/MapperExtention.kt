@@ -4,5 +4,5 @@ import com.example.cooldrinks.model.Drink
 import com.example.cooldrinks.remote.dtos.DrinksDto
 
 fun DrinksDto.toDomain() = Drink(
-    name, imageUrl, id, instruction
+    name, imageUrl, id, instruction, ingredient.map { it.ingredientTitle }
 )
