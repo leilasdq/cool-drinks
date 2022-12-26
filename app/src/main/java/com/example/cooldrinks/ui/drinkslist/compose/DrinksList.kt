@@ -69,7 +69,13 @@ fun setTimeToMakeDrink() = Random.nextInt(10, 30)
 private fun Prev() {
     val fakeList = mutableListOf<Drink>()
     for (i in 0 .. 5) {
-        fakeList.add(Drink("name $i", "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg", "$i", "hh", null))
+        fakeList.add(Drink(
+            "name $i",
+            "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg",
+            "$i",
+            "hh",
+            ingredientAndMeasure = mapOf("butter" to "5", "milk" to "10")
+        ))
     }
     DrinksList(fakeList) {}
 }

@@ -125,17 +125,29 @@ fun DetailDrinkView(
                 ),
                 textAlign = TextAlign.Center
             )
-            item.ingredient?.let {
+            item.ingredientAndMeasure.let {
                 val bullet = "\u2022"
                 for (ingredientItem in it) {
                     Column {
-                        Text(
-                            text = "$bullet $ingredientItem",
+                        Row(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
-                            style = MaterialTheme.typography.bodyLarge,
-                        )
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Text(
+                                text = "$bullet ${ingredientItem.key}",
+                                modifier = Modifier
+                                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                            Spacer(modifier = Modifier.padding(start = 4.dp))
+                            Text(
+                                text = ": ${ingredientItem.value}",
+                                modifier = Modifier
+                                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                        }
                     }
                 }
             }
@@ -185,7 +197,7 @@ private fun prev() {
                 "https://www.thecocktaildb.com/images/media/drink/xwqvur1468876473.jpg",
                 "1",
                 "how to make it",
-                listOf("Orange juice", "Grapefruit juice", "Apple juice")
+                ingredientAndMeasure = mapOf("butter" to "5", "milk" to "10")
             ))
     }
 }

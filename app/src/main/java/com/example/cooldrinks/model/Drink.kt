@@ -5,5 +5,5 @@ data class Drink(
     val imageUrl: String,
     val id: String,
     val instruction: String?,
-    val ingredient: List<String>?
+    val ingredientAndMeasure: Map<String, String>
 )

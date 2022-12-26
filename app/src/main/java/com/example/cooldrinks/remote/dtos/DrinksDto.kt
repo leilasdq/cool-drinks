@@ -9,11 +9,8 @@ data class DrinksDto(
     val imageUrl: String,
     val id: String,
     val instruction: String?,
-    val ingredient: List<IngredientDto>
-)
-
-data class IngredientDto(
-    val ingredientTitle: String
+    val ingredient: List<String>,
+    val measure: List<String>
 )
 
 object DrinkIngredientListDeserialize: JsonDeserializer<DrinksDto> {
@@ -25,7 +22,8 @@ object DrinkIngredientListDeserialize: JsonDeserializer<DrinksDto> {
         if (json == null || json.isJsonNull)
             return null
 
-        val ingredientList = mutableListOf<IngredientDto>()
+        val ingredientList = mutableListOf<String>()
+        val measureList = mutableListOf<String>()
         val keys = (json as JsonObject).keySet()
         try {
             val name = (json as JsonObject).get("strDrink").asString
@@ -38,11 +36,13 @@ object DrinkIngredientListDeserialize: JsonDeserializer<DrinksDto> {
             for (items in keys) {
                 val jsonItem = (json as JsonObject).get(items)
                 if (items.startsWith("strIngredient") && jsonItem.isJsonNull.not())
-                    ingredientList.add(IngredientDto(jsonItem.asString))
+                    ingredientList.add(jsonItem.asString)
+                if (items.startsWith("strMeasure") && jsonItem.isJsonNull.not())
+                    measureList.add(jsonItem.asString)
             }
 
 
-            return DrinksDto(name, image, id, instruction, ingredientList)
+            return DrinksDto(name, image, id, instruction, ingredientList, measureList)
         } catch (e: Exception) {
             throw JsonParseException("The api was not in the expected format.")
         }
