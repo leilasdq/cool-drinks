@@ -12,6 +12,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.cooldrinks.ui.drinkdetail.compose.DetailDrinkView
 import com.example.cooldrinks.utils.compose.AppTheme
@@ -42,10 +43,17 @@ class DrinkDetailFragment : Fragment() {
 
                 AppTheme {
                     Scaffold() {
-                        detailDrink?.let { DetailDrinkView(item = it) }
+                        detailDrink?.let {
+                            DetailDrinkView(
+                                item = it,
+                                onBackButtonClicked = ::onNavigateUp
+                            )
+                        }
                     }
                 }
             }
         }
     }
+
+    private fun onNavigateUp() = findNavController().navigateUp()
 }

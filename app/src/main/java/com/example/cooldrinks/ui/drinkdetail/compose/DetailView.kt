@@ -1,25 +1,19 @@
 package com.example.cooldrinks.ui.drinkdetail.compose
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Timer
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role.Companion.Image
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +30,8 @@ import kotlin.random.Random
 
 @Composable
 fun DetailDrinkView(
-    item: Drink
+    item: Drink,
+    onBackButtonClicked: () -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -45,11 +40,11 @@ fun DetailDrinkView(
             )
             .fillMaxSize()
     ) {
-        val (title, card, image, cardContent) = createRefs()
+        val (title, backIcon, card, image, cardContent) = createRefs()
         val guideline = createGuidelineFromTop(fraction = 0.3f)
 
         Text(
-            text = "Drink info",
+            text = "Drink Info",
             modifier = Modifier
                 .constrainAs(title) {
                     top.linkTo(parent.top, 8.dp)
@@ -57,6 +52,17 @@ fun DetailDrinkView(
                     end.linkTo(parent.end)
                 },
             style = MaterialTheme.typography.headlineSmall
+        )
+        Icon(
+            Icons.Filled.ArrowBackIos, contentDescription = null,
+            modifier = Modifier
+                .constrainAs(backIcon) {
+                    top.linkTo(parent.top, 8.dp)
+                    start.linkTo(parent.start, 8.dp)
+                }
+                .clickable {
+                    onBackButtonClicked.invoke()
+                }
         )
         Card(
             modifier = Modifier
@@ -86,6 +92,7 @@ fun DetailDrinkView(
                     bottom.linkTo(card.bottom)
                 }
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         )
         {
             Text(
@@ -119,7 +126,7 @@ fun DetailDrinkView(
                 text = "Ingredient list",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_normal)),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -155,7 +162,7 @@ fun DetailDrinkView(
                 text = "Instruction",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_small)),
+                    .padding(top = dimensionResource(id = R.dimen.dimen_margin_normal)),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -189,7 +196,7 @@ fun DetailDrinkView(
 }
 
 @Preview(showSystemUi = true, showBackground = true) @Composable
-private fun prev() {
+private fun Prev() {
     AppTheme {
         DetailDrinkView(
             Drink(
@@ -198,6 +205,8 @@ private fun prev() {
                 "1",
                 "how to make it",
                 ingredientAndMeasure = mapOf("butter" to "5", "milk" to "10")
-            ))
+            ),
+            {}
+        )
     }
 }
