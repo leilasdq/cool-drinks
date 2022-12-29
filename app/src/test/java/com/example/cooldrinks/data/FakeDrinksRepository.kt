@@ -20,7 +20,7 @@ class FakeDrinksRepository(): DrinksRepository {
         } else {
             flowOf(
                 Resource.Success(
-                    listOf()
+                    listOf(Drink("test name", "test url", "1", null, mapOf()))
                 )
             )
         }
