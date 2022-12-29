@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cooldrinks.ui.drinkslist.compose.DrinksList
 import com.example.cooldrinks.utils.compose.AppTheme
+import com.example.cooldrinks.utils.showMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +46,18 @@ class DrinksListFragment : Fragment() {
              }
          }
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observeViewModels()
+    }
+
+    private fun observeViewModels() {
+        viewModel.drinkError.observe(viewLifecycleOwner) {
+            it.peekContent().message?.let { msg -> requireContext().showMessage(msg) }
+        }
     }
 
     private fun onDrinkClicked(id: Int) {

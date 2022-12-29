@@ -1,5 +1,6 @@
 package com.example.cooldrinks.ui.drinkslist
 
+import SingleEvent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,8 +21,14 @@ class DrinksListViewModel @Inject constructor(
 
     private val _drinksListData = MutableLiveData<List<Drink>>()
     val drinks: LiveData<List<Drink>> = _drinksListData
+    private val _drinksErrorData = MutableLiveData<SingleEvent<Throwable>>()
+    val drinkError: LiveData<SingleEvent<Throwable>> = _drinksErrorData
 
     init {
+        getDrinks()
+    }
+
+    private fun getDrinks() {
         viewModelScope.launch(Dispatchers.IO) {
             drinksRepo.getNonAlcoholicDrinks().collect { resource ->
                 when(resource) {
@@ -32,7 +39,7 @@ class DrinksListViewModel @Inject constructor(
                         Log.d("testtt", "onViewCreated: success ${resource.data}")
                     }
                     is Resource.Error -> {
-                        Log.d("testtt", "onViewCreated: error ${resource.error.message}")
+                        _drinksErrorData.value = SingleEvent(resource.error)
                     }
                     is Resource.Loading -> {
                         Log.d("testtt", "onViewCreated: loading")

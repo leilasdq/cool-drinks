@@ -6,7 +6,6 @@ import com.example.cooldrinks.utils.Resource
 import com.example.cooldrinks.utils.networkResult
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 interface DrinksRepository {
     fun getNonAlcoholicDrinks(): Flow<Resource<List<Drink>>>
